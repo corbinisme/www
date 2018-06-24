@@ -410,13 +410,25 @@ ul.tabs {
 }
 #sharePage .wrapForm {
   padding: 10px;
+
+}
+.shareClose {
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+  background: #777;
 }
 #sharePage .shareClose {
   margin-bottom: 8px;
   margin-top: -4px;
+
 }
  .wrapForm {
       padding: 1em;
+       padding-top: 30px;
     }
 .shareClose {float: right;}
     #sharePage ul {list-style: none; margin: 0;padding:0;}
@@ -532,7 +544,7 @@ ul.tabs {
 #numSearch, #search {
   position: absolute;
   left: 0;
-  top:55px;
+  top:51px;
   text-align: center;
   width: 100%;
   z-index: 8;
@@ -540,7 +552,7 @@ ul.tabs {
 #numSearch .wrapForm, #search .searchWrap {
   z-index:21;
   margin: auto;
-  padding: 10px;
+
   background: #fff;
   /*
   border: 1px solid #333;
@@ -624,21 +636,28 @@ ul.tabs {
 .searchWrapper .dataTables_wrapper .dataTables_filter input {
   position: absolute;
   left: 0;
-  top: -15px;
-  width: 97%;
+  top: 0px;
+  width: 100%;
   font-size: 1em;
   line-height: 1em;
-  font-family: Arial, Helvetica, sans-serif
+  margin-left: 0px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  height: 44px;
 
 }
 .searchWrapper .dataTables_wrapper .dataTables_filter {
   display: block;
   color: #fff;
+
 }
 
 .dataTable th,
 .dataTable td {
   text-align: left;
+}
+.dataTables_wrapper {
+  padding-top: 33px;
 }
 @media screen and (min-width:768px) {
   .main {
