@@ -1,4 +1,5 @@
-var fr= ["1) Heureux l’homme",
+var title_fr= [
+"1) Heureux l’homme",
 "2) Psaume 1",
 "3) Croyez en Dieu et invoquez-le",
 "4) Prête l’oreille à mes paroles, ô Éternel",

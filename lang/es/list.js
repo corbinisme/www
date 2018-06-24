@@ -1,4 +1,4 @@
-var es = [
+var title_es = [
 "1) Dichoso es el varón ",
 "2) Salmo 1",
 "3) En Dios confiad y temed",

@@ -1,10 +1,8 @@
 // window.open wasn't opening a link in the system browser on iOS, so we have to use this function (requires phonegap.js)
 function redirectToSystemBrowser(url) {
-    // Wait for Cordova to load
-    
-        // open URL in default web browser
-        var ref = window.open(encodeURI(url), '_system', 'location=yes');
-    
+  // Wait for Cordova to load
+  // open URL in default web browser
+  var ref = window.open(encodeURI(url), '_system', 'location=yes');  
 }
 
 var lang = "en";
@@ -27,8 +25,9 @@ function startRandom(){
   }
   startVal = pre + "" +startVal;
 
-  startVal=1;
+  //startVal=1;
   $("#hymnSelect").val(startVal).change();
+  console.log("start "+startVal);
 }
 
 function footerPlace() {
@@ -43,225 +42,88 @@ function submitNum(){
   $("#musicPlayer").hide();
 }
 var path ="";
-        if(env!="ucg") {
-          path = "http://members.ucg.org/files/hymnal/hymnal/";
-        } else {
-          path = "http://corbdesign.com/bucket/HYMNAL/";
-        }
+if(env!="ucg") {
+  path = "http://members.ucg.org/files/hymnal/hymnal/";
+} else {
+  path = "http://corbdesign.com/bucket/HYMNAL/";
+}
 
 var espXML ={};
 var frXML = {};
+var deXML = {};
+var pgXML = {};
+var aslXML = {};
 
 function makeDropdown(lang, hymn){
-  //alert(lang);
- 
- 
-    
-  
+  var scriptPath = "lang/" + lang + "/list.js";
   $("#tocWrap").html("");
-  if(lang=="es"){
-  // get language
 
-  //alert("esp");
-
-   
-    $.getScript("lang/es/list.js", function(){
-       $("#hymnSelect").html("");
-       var $toc = $(document.createElement("table"));
-          $toc.attr("id", "toc");
-          $toc.append("<thead><tr><th>Title</th><th>Page</th></tr></thead>");
-          var $tbody = $(document.createElement("tbody"));
-        for(var i=0; i<es.length; i++){
-          var num = i+1;
-          if(num<100){
-            num = "0"+num;
-          }
-          if(num<10){
-            num = "0"+num;
-          }
-          var $option = $(document.createElement("option"));
-          $option.attr("value", num);
-          $option.html(es[i]); 
-          $("#hymnSelect").append($option);
-
-          
-          
-          
-          var $row = $(document.createElement("tr"));
-          var name = es[i];
-          name = name.substring(name.indexOf(")")+2,name.length);
-          $firstCell = $(document.createElement("td"));
-          $link = $(document.createElement("a"));
-          $link.attr("href", "javascript:loadSearch('"+num+"');").html(name).addClass("searchLink");
-          $firstCell.append($link);
-
-          $lastCell = $(document.createElement("td"));
-          $lastCell.html(num);
-          $row.append($firstCell, $lastCell);
-          //$row.append("<td>"+num+"</td>");
-          $tbody.append($row);
-          
-         
-        }
-        $toc.append($tbody);
-         $("#tocWrap").append($toc);
-        
-        $('#toc').dataTable().fnDestroy();
-        
-        $("#toc").dataTable({
-          'iDisplayLength': 195,
-          language: {
-            searchPlaceholder: "Search records"
-           },
-           "dom": '<"filter"f>t<"clear">'
-        });
-
-
-
-        if(hymn==0) {
-          startRandom();
-        } else {
-          $("#hymnSelect").val(hymn).change();
-        }
-    });
-  } else if(lang=="fr"){
-    //alert("pardon my french");
-
-    $.getScript("lang/fr/list.js", function(){
-      //alert("loaded");
-       $("#hymnSelect").html("");
-       var $toc = $(document.createElement("table"));
-          $toc.attr("id", "toc");
-          $toc.append("<thead><tr><th>Title</th><th>Page</th></tr></thead>");
-          var $tbody = $(document.createElement("tbody"));
-        for(var i=0; i<fr.length; i++){
-          var num = i+1;
-          if(num<100){
-            num = "0"+num;
-          }
-          if(num<10){
-            num = "0"+num;
-          }
-          var $option = $(document.createElement("option"));
-          $option.attr("value", num);
-          $option.html(fr[i]); 
-          $("#hymnSelect").append($option);
-
-          
-          
-          
-          var $row = $(document.createElement("tr"));
-          var name = fr[i];
-          name = name.substring(name.indexOf(")")+2,name.length);
-          $firstCell = $(document.createElement("td"));
-          $link = $(document.createElement("a"));
-          $link.attr("href", "javascript:loadSearch('"+num+"');").html(name).addClass("searchLink");
-          $firstCell.append($link);
-
-          $lastCell = $(document.createElement("td"));
-          $lastCell.html(num);
-          $row.append($firstCell, $lastCell);
-          //$row.append("<td>"+num+"</td>");
-          $tbody.append($row);
-          
-         
-        }
-        $toc.append($tbody);
-         $("#tocWrap").append($toc);
-        
-        $('#toc').dataTable().fnDestroy();
-        
-        $("#toc").dataTable({
-          'iDisplayLength': 195,
-          language: {
-            searchPlaceholder: "Search records"
-           },
-           "dom": '<"filter"f>t<"clear">'
-        });
-
-
-
-        if(hymn==0) {
-          startRandom();
-        } else {
-          $("#hymnSelect").val(hymn).change();
-        }
-    });
-
-
-  } else if(lang=="de"){
-    
-    //alert("das ist gut fur zie");
-  } else {
-    //english!
-     $.getScript("lang/en/list.js", function(){
-       $("#hymnSelect").html("");
-       var $toc = $(document.createElement("table"));
-          $toc.attr("id", "toc");
-          $toc.append("<thead><tr><th>Title</th><th>Page</th></tr></thead>");
-          var $tbody = $(document.createElement("tbody"));
-        for(var i=0; i<en.length; i++){
-          var num = i+1;
-          if(num<100){
-            num = "0"+num;
-          }
-          if(num<10){
-            num = "0"+num;
-          }
-          var $option = $(document.createElement("option"));
-          $option.attr("value", num);
-          $option.html(en[i]); 
-          $("#hymnSelect").append($option);
-
-          
-          
-          
-          var $row = $(document.createElement("tr"));
-
-          var name = en[i];
-          name = name.substring(name.indexOf(")")+2,name.length);
-
-          $firstCell = $(document.createElement("td"));
-          $link = $(document.createElement("a"));
-          $link.attr("href", "javascript:loadSearch('"+num+"');").html(name).addClass("searchLink");
-          $firstCell.append($link);
-
-          $lastCell = $(document.createElement("td"));
-          $lastCell.html(num);
-          $row.append($firstCell, $lastCell);
-
-          //$row.html("<td>"+name+"</td><td>"+num+"</td>");
-          $tbody.append($row);
-          
-          
-
-        }
-        $toc.append($tbody);
-        $("#tocWrap").append($toc);
-        $('#toc').dataTable().fnDestroy();
-        
-         $("#toc").dataTable({
-          'iDisplayLength': 195,
-           language: {
-            searchPlaceholder: "Search records"
-           },
-           "dom": '<"filter"f>t<"clear">'
-        });
-
-
-        if(hymn==0) {
-          startRandom();
-        } else {
-          $("#hymnSelect").val(hymn).change();
-        }
-    });
+  switch(lang){
+    case 'en': var title = title_en; break;
+    case 'es': var title = title_es; break;
+    case 'pg': var title = title_pg; break;
+    case 'fr': var title = title_fr; break;
+    case 'de': var title = title_de; break;
+    case 'asl': var title = title_asl; break;
+    default: var title = title_en; break;
   }
   
-  
 
+  if(title){
+    
+      $("#hymnSelect").html("");
+      var $toc = $(document.createElement("table"));
+          $toc.attr("id", "toc");
+          $toc.append("<thead><tr><th>Title</th><th>Page</th></tr></thead>");
+      var $tbody = $(document.createElement("tbody"));
+      for(var i=0; i<title.length; i++){
+        var num = i+1;
+        if(num<100){
+          num = "0"+num;
+        }
+        if(num<10){
+          num = "0"+num;
+        }
+        var $option = $(document.createElement("option"));
+        $option.attr("value", num);
+        $option.html(title[i]); 
+        $("#hymnSelect").append($option);
 
-  
+        var $row = $(document.createElement("tr"));
+        var name = title[i];
+        name = name.substring(name.indexOf(")")+2,name.length);
+        $firstCell = $(document.createElement("td"));
+        $link = $(document.createElement("a"));
+        $link.attr("href", "javascript:loadSearch('"+num+"');").html(name).addClass("searchLink");
+        $firstCell.append($link);
 
+        $lastCell = $(document.createElement("td"));
+        $lastCell.html(num);
+        $row.append($firstCell, $lastCell);
+        //$row.append("<td>"+num+"</td>");
+        $tbody.append($row);
+      }
+      $toc.append($tbody);
+        
+      $("#tocWrap").append($toc);
+      $('#toc').dataTable().fnDestroy();
+      $("#toc").dataTable({
+        'iDisplayLength': 195,
+        language: {
+          searchPlaceholder: "Search records"
+         },
+         "dom": '<"filter"f>t<"clear">'
+      });
+
+      if(hymn==0) {
+        startRandom();
+      } else {
+        $("#hymnSelect").val(hymn).change();
+      }
+    
+  } else {
+    // false
+  }
 }
 
 function loadSearch(num){
@@ -270,6 +132,7 @@ function loadSearch(num){
 }
 $(document).ready(function(){
 
+  
   var hymn = 1;
   $("#jquery_jplayer_1").jPlayer({
     /*
@@ -293,36 +156,6 @@ $(document).ready(function(){
     toggleDuration: true
   });
 
-
-  $.ajax({
-      url: "lang/es/all.xml",
-      dataType: "xml",
-      success: function(xml){
-        console.log(xml);
-        $(xml).find("page").each(function(){
-          espXML[$(this).attr("name")] = $(this).text();
-        });
-      },
-      error: function(e){
-        alert("no se");
-      }
-  });
-
-  $.ajax({
-      url: "lang/fr/all.xml",
-      dataType: "xml",
-      success: function(xml){
-        console.log(xml);
-        $(xml).find("page").each(function(){
-          frXML[$(this).attr("name")] = $(this).text();
-        });
-
-        //console.log(frXML);
-      },
-      error: function(e){
-        alert("pardon");
-      }
-  });
   
   makeDropdown(lang, 0);
   
@@ -393,40 +226,18 @@ $(document).ready(function(){
             var title = $("#hymnSelect option[value="+hymnNum+"]").html();
             title = title.substring(title.indexOf(")")+1, title.length);
             var songname = hymnNum;
-            //songname = encodeURIComponent(songname);
-            //onclick="window.open(encodeURI('http://www.google.com/'), '_system')"
-            //var target = encodeURI(path + 'accompany/mp3/'+ songname+'.mp3');
-            var target = "http://corbdesign.com/bucket/HYMNAL/jplayer/player.html#"+hymnNum;
-            // redirectToSystemBrowser
-            /*
-            var $linky = $(document.createElement("a"));
-            $linky.attr("href", "javascript:;");
-            $linky.attr("onclick", "window.open('"+target+"', '_system');");
-            $linky.html("Download Mp3"); 
-            //var link = '<a href="javascript:;" onclick="window.open(\''+target+'\', \''_system\'')">Download mp3</a>"';
-            //console.log(songname + " is updating");
-            var $linky2 = $(document.createElement("iframe"));
-            $linky2.attr("src", target);
-            $linky2.attr("frameborder", "0");
-            $linky2.attr("width", "100%");
-            $linky2.attr("height", "50");
-            */
+            
         if(hymnNum){   
-            hymn = "http://members.ucg.org/files/hymnal/hymnal/accompany/mp3/" + hymnNum + ".mp3";
+            hymn = "http://streaming.ucg.org/files/hymnal/hymnal/accompany/mp3/" + hymnNum + ".mp3";
           } else {
-            hymn = "http://members.ucg.org/files/hymnal/hymnal/accompany/mp3/" + "001" + ".mp3";
+            hymn = "http://streaming.ucg.org/files/hymnal/hymnal/accompany/mp3/" + "001" + ".mp3";
             //alert("no hymn selected");
           }
 
-
          $('#jquery_jplayer_1').jPlayer('setMedia', {
             mp3: hymn
-         });
+         }).jPlayer("play");
 
-
-            //$("#musicPlayer").html("").append($linky2 );
-
-            // make iframe to show the mp3!
           }
       });
 
@@ -440,14 +251,7 @@ $(document).ready(function(){
       $("#numSearch").hide();
       $(".hymnalSelection").show();
     });
-    /*$(".copyClose").on("click", function(){
-      $("#home").show();
-      $("#sharePage").hide();
-      $(".custom-btns a").removeClass("current");
-      $("#musicPlayer").hide();
-      $("#copyrightPage").hide();
-    });
-    */
+    
     $(".tabs li a").on("click", function(){
         $par = $(this).parent();
         $(".tabs li").removeClass("current");
@@ -467,7 +271,6 @@ $(document).ready(function(){
     $(".overlay").on("click", function(){
       $(this).parent().hide();
       $(".custom-btns a").removeClass("current");
-      //$("#footerBot").show();
     });
 
 
@@ -535,28 +338,44 @@ $(document).ready(function(){
     var id = $(this).val();
     var file = "hymn"+id;
     // get language support
+    console.log(id + " and " + lang);
     if(lang=='es'){
-      //var result = lyrics_es[file];
-      //alert(id);
-      var result = espXML[id];
-      if(espXML[id]){
-      $(".mainPage #loader").html(result);
+      var result = lyrics_es[file];
+      if(result){
+        $(".mainPage #loader").html(result);
       } else {
-          $(".mainPage #loader").html("Select a hymn!");
+        $(".mainPage #loader").html("Select a hymn!");
       }
     } else if(lang=='fr'){
-      var result = frXML[id];
-      if(frXML[id]){
+      var result = lyrics_fr[file];
+      if(result){
         $(".mainPage #loader").html(result);
       } else {
         $(".mainPage #loader").html("Select a hymn!");
       }
 
+    } else if(lang=='pg'){
+      var result = lyrics_pg[file];
+      if(result){
+        $(".mainPage #loader").html(result);
+      } else {
+        $(".mainPage #loader").html("Select a hymn!");
+      }
+    }  else if(lang=='de'){
+      var result = lyrics_de[file];
+      if(result){
+        $(".mainPage #loader").html(result);
+      } else {
+        $(".mainPage #loader").html("Select a hymn!");
+      }
     } else {
       // english
       var result = lyrics_en[file];
-      console.log(file);
-      $(".mainPage #loader").html(result);
+      if(result){
+        $(".mainPage #loader").html(result);
+      } else {
+        $(".mainPage #loader").html("Select a hymn!");
+      }
     }
     //var result = lyrics[file];
     
@@ -611,7 +430,7 @@ $(document).ready(function(){
       }
     });
 
-  
+  startRandom();
 });
 
 $(window).resize(function(){

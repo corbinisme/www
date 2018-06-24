@@ -1,4 +1,4 @@
-var title_en = [
+var en = [
 "1) Blest and Happy is the Man",
 "2) Psalm 1",
 "3) Trust in God and Stand in Awe",
