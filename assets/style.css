@@ -51,6 +51,8 @@ a, a:visited {
   color: #fff;
   display: inline-block;
   float: left;
+  height: 50px;
+  line-height: 54px;
 }
 .navvy h1.highlight {
   background: #494949;
@@ -202,6 +204,7 @@ a.hiddenLink {
   background-image: none;
   padding-right: 0;
 }
+
 
 .hymnal-select, .dropdown {
   position: absolute;
@@ -584,10 +587,11 @@ ul.tabs {
   font-size: 20px;
   font-family: arial, Helvetica, sans-serif;
 }
-
+#selectbox {
+  padding: 5px;
+}
 #hymnSelect {
-  width: 98%;
-  margin: 5px;
+  width: 100%;
 }
 #formByNum, .searchWrapper {
   width: 100%;
@@ -663,4 +667,37 @@ ul.tabs {
   .main {
     font-size: 1.3em;
   }
+}
+
+
+/* themes */
+.cogwa .headerTop .ui-bar {
+  background-color: #9A816A;
+}
+.cogwa .custom-btns a {
+  border:1px solid #9A816A;
+}
+.cogwa .navvy a.hamburger {
+  background-color: #b3a08f;
+}
+.cogwa #information span.fa {
+  color: #fff;
+}
+.cogwa .ui-bar-b {
+  border: 1px solid #594b3e;
+    background: #594b3e;
+    color: #fff;
+    clear: both;
+    font-weight: 700;
+    text-shadow: 0 1px 0 #000;
+}
+
+.cogwa.dim .ui-bar-a {
+  background-color:#2f2923;
+}
+.cogwa.dim  .custom-btns a {
+  border:1px solid #2f2923;
+}
+.cogwa.dim  .navvy a.hamburger {
+  background-color: #2f2923;
 }

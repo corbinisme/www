@@ -227,12 +227,18 @@ $(document).ready(function(){
             title = title.substring(title.indexOf(")")+1, title.length);
             var songname = hymnNum;
             
-        if(hymnNum){   
-            hymn = "http://streaming.ucg.org/files/hymnal/hymnal/accompany/mp3/" + hymnNum + ".mp3";
-          } else {
-            hymn = "http://streaming.ucg.org/files/hymnal/hymnal/accompany/mp3/" + "001" + ".mp3";
+        // get new source files for cogwa!
+        if($("body").hasClass("cogwa")){
+          var pathTemplate = "http://corbdesign.com/bucket/cogwa/hymns/"
+        } else {
+          var pathTemplate = "http://streaming.ucg.org/files/hymnal/hymnal/accompany/mp3/";
+        }
+        if(hymnNum){
+            hymn = pathTemplate + hymnNum + ".mp3";
+        } else {
+            hymn = pathTemplate + "001" + ".mp3";
             //alert("no hymn selected");
-          }
+        }
 
          $('#jquery_jplayer_1').jPlayer('setMedia', {
             mp3: hymn
