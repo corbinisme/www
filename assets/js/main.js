@@ -141,84 +141,31 @@ $(document).ready(function(){
 
   
   var hymn = 1;
-  $("#jquery_jplayer_1").jPlayer({
-    /*
-    ready: function () {
-      $(this).jPlayer("setMedia", {
-        title: "Hymn",
-        mp3: hymn
-      });
-      
-    },
-    */
-    swfPath: "dist/jplayer",
-    supplied: "mp3",
-    wmode: "window",
-    useStateClassSkin: true,
-    autoBlur: false,
-    smoothPlayBar: true,
-    autoPlay: true,
-    keyEnabled: true,
-    remainingDuration: true,
-    toggleDuration: true
-  });
-
-  
-  makeDropdown(lang, 0);
-  
-    $(".custom-btns a").on("click", function(){
-      $(".custom-btns a").removeClass("current");
-      $(this).toggleClass("current");
-      $("#musicPlayer").hide();
-      $("#search").hide();
-      $("#numSearch").hide();
-      $("#copyrightPage").hide();
-      //$("#musicPlayer").hide();
-      $("#home").hide();
-
-      if($(this).attr("id")=="byNumber"){
-        $("#numSearch").show();
-        $(".hymnalSelection").hide();
-        //$("#footerBot").hide();
-        $("#numSearch #nums").val("").focus();
-        $("#numSearch .overlay").css("height", $(window).height());
-      } else if($(this).attr("id")=="searcher") {
-        $("#search").show();
-        $(".hymnalSelection").hide();
-
-        $("#searchField").val("").focus();
-        //$("#footerBot").hide();
-        $("#search .overlay").css("height", $(window).height());
-      } else if($(this).attr("id")=="copyright") {
+  var player = $("#jquery_jplayer_1").jPlayer({
+      /*
+      ready: function () {
+        $(this).jPlayer("setMedia", {
+          title: "Hymn",
+          mp3: hymn
+        });
         
-        $("#copyrightPage").show();
-         $("#copyrightText").load("copyright.html");
-      } else {
-        $("#home").show();
-        
-        var valu = $("#hymnSelect").val();
-        valu = parseInt(valu, 10);
-        
-        var hymnURL = path + "?hymn="+valu;
-        var shareFB = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(hymnURL);
-        $("#facebookShare").attr("href", shareFB);
-        var shareTW = "https://twitter.com/intent/tweet?source=webclient&text=check%20out%20this%20Sabbath%20song%3A%2" + encodeURIComponent(hymnURL);
-        $("#twitterShare").attr("href", shareTW);
-        $("#emailShareURL").attr("value",hymnURL);
-        $("#home").hide();
-        $("#sharePage").show();
-      //console.log(shareFB + "\n" + shareTW);
-        $("#aboutText").load("about.html");
-        
-        
-      }
-
+      },
+      */
+      swfPath: "dist/jplayer",
+      supplied: "mp3",
+      wmode: "window",
+      useStateClassSkin: true,
+      autoBlur: false,
+      smoothPlayBar: true,
+      autoPlay: true,
+      keyEnabled: true,
+      remainingDuration: true,
+      toggleDuration: true
     });
-
-    $(".contrastIcon").on("click", function(){
-      $("body").toggleClass("dim");
-
-    });
+  
+  //makeDropdown(lang, 0);
+  
+    
     $(".musicIcon").on("click", function(){
 
        if($("#musicPlayer").is(":visible")) {
