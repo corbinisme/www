@@ -14,28 +14,7 @@ function setConfig(){
 }
 
 
-function startRandom(){
-  var startVal;
-  var random;
-  var min=1;
-  var max = 191;
-  random = Math.floor(Math.random() * (max - min +1)) + min;
-  startVal = random;
 
-
-  var pre = "";
-  if(startVal<100) {
-    pre="0";
-  }
-  if(startVal<10){
-    pre="00";
-  }
-  startVal = pre + "" +startVal;
-
-  //startVal=1;
-  $("#hymnSelect").val(startVal).change();
-  console.log("start "+startVal);
-}
 
 function footerPlace() {
   var height = $(window).height(); 
@@ -123,7 +102,7 @@ function makeDropdown(lang, hymn){
       });
 
       if(hymn==0) {
-        startRandom();
+        //startRandom();
       } else {
         $("#hymnSelect").val(hymn).change();
       }
@@ -273,61 +252,7 @@ $(document).ready(function(){
   });
   
 
-  $(".mainPage #hymnSelect").change(function(){
-    var id = $(this).val();
-    var file = "hymn"+id;
-    // get language support
-    console.log(id + " and " + lang);
-    if(lang=='es'){
-      var result = lyrics_es[file];
-      if(result){
-        $(".mainPage #loader").html(result);
-      } else {
-        $(".mainPage #loader").html("Select a hymn!");
-      }
-    } else if(lang=='fr'){
-      var result = lyrics_fr[file];
-      if(result){
-        $(".mainPage #loader").html(result);
-      } else {
-        $(".mainPage #loader").html("Select a hymn!");
-      }
-
-    } else if(lang=='pg'){
-      var result = lyrics_pg[file];
-      if(result){
-        $(".mainPage #loader").html(result);
-      } else {
-        $(".mainPage #loader").html("Select a hymn!");
-      }
-    }  else if(lang=='de'){
-      var result = lyrics_de[file];
-      if(result){
-        $(".mainPage #loader").html(result);
-      } else {
-        $(".mainPage #loader").html("Select a hymn!");
-      }
-    } else {
-      // english
-      var result = lyrics_en[file];
-      if(result){
-        $(".mainPage #loader").html(result);
-      } else {
-        $(".mainPage #loader").html("Select a hymn!");
-      }
-    }
-    //var result = lyrics[file];
-    
-    $("#home").show();
-    $("#musicPlayer").hide();
-
-    var share = '<div class="actions"><a href="javascript:;"><i class="fa fa-share-square-o"></i>Share</a><a href="javascript:;"><i class="fa fa-music"></i>Music</a></div>';
-    //$(".mainPage #loader").append(share)
-    //var load = '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/128417090&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_artwork=true"></iframe>';
-    //$(".mainPage #loader").append(load);
-    //$(".mainPage #loader").append("<div class='media clearfix'><ul><li><a href=''><img src='assets/music.jpg' /></a></li><li><a href=''><img src='assets/share.jpg' /></a></li></ul></div>");
-    //$(".mainPage #loader").load("pages/hymn"+id+".html");
-  });
+  
 
   $("footer a.textSize").on("click", function(){
       var $context = $(".ui-content");
@@ -369,7 +294,7 @@ $(document).ready(function(){
       }
     });
 
-  startRandom();
+  //startRandom();
 });
 
 $(window).resize(function(){

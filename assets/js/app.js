@@ -25,6 +25,8 @@ var app = {
 		app.eventBindings();
 		app.initJplayer();
 		app.makeDropdown();
+
+		app.startRandom();
 	},
 	getConfig: function(){
 		app.brand = config.brand;
@@ -38,12 +40,13 @@ var app = {
 	},
 	eventBindings: function(){
 
-
+		// contrast icon
 	    $(".contrastIcon").on("click", function(){
 	      $("body").toggleClass("dim");
 
 	    });
 
+	    // language selector
 	    $(".custom-btns a").on("click", function(){
 	      $(".custom-btns a").removeClass("current");
 	      $(this).toggleClass("current");
@@ -55,21 +58,23 @@ var app = {
 	      $("#home").hide();
 
 	      if($(this).attr("id")=="byNumber"){
+	      	// search by number
+
 	        $("#numSearch").show();
 	        $(".hymnalSelection").hide();
-	        //$("#footerBot").hide();
 	        $("#numSearch #nums").val("").focus();
 	        $("#numSearch .overlay").css("height", $(window).height());
 	      } else if($(this).attr("id")=="searcher") {
+	      	// search by text
+
 	        $("#search").show();
 	        $(".hymnalSelection").hide();
-
 	        $("#searchField").val("").focus();
-	        //$("#footerBot").hide();
 	        $("#search .overlay").css("height", $(window).height());
-	      } else if($(this).attr("id")=="copyright") {
+	      } else if($(this).attr("id")=="copyrights") {
+	      	// show copyright
 	        
-	        $("#copyrightPage").show();
+	         $("#copyrightPage").show();
 	         $("#copyrightText").load("copyright.html");
 	      } else {
 	        $("#home").show();
@@ -92,6 +97,64 @@ var app = {
 	      }
 
 	    });
+
+
+	    // dropdown hymn selector
+	    $(".mainPage #hymnSelect").change(function(){
+		    var id = $(this).val();
+		    var file = "hymn"+id;
+		    // get language support
+		    console.log(id + " and " + lang);
+		    if(lang=='es'){
+		      var result = lyrics_es[file];
+		      if(result){
+		        $(".mainPage #loader").html(result);
+		      } else {
+		        $(".mainPage #loader").html("Select a hymn!");
+		      }
+		    } else if(lang=='fr'){
+		      var result = lyrics_fr[file];
+		      if(result){
+		        $(".mainPage #loader").html(result);
+		      } else {
+		        $(".mainPage #loader").html("Select a hymn!");
+		      }
+
+		    } else if(lang=='pg'){
+		      var result = lyrics_pg[file];
+		      if(result){
+		        $(".mainPage #loader").html(result);
+		      } else {
+		        $(".mainPage #loader").html("Select a hymn!");
+		      }
+		    }  else if(lang=='de'){
+		      var result = lyrics_de[file];
+		      if(result){
+		        $(".mainPage #loader").html(result);
+		      } else {
+		        $(".mainPage #loader").html("Select a hymn!");
+		      }
+		    } else {
+		      // english
+		      var result = lyrics_en[file];
+		      if(result){
+		        $(".mainPage #loader").html(result);
+		      } else {
+		        $(".mainPage #loader").html("Select a hymn!");
+		      }
+		    }
+		    //var result = lyrics[file];
+		    
+		    $("#home").show();
+		    $("#musicPlayer").hide();
+
+		    var share = '<div class="actions"><a href="javascript:;"><i class="fa fa-share-square-o"></i>Share</a><a href="javascript:;"><i class="fa fa-music"></i>Music</a></div>';
+		    //$(".mainPage #loader").append(share)
+		    //var load = '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/128417090&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_artwork=true"></iframe>';
+		    //$(".mainPage #loader").append(load);
+		    //$(".mainPage #loader").append("<div class='media clearfix'><ul><li><a href=''><img src='assets/music.jpg' /></a></li><li><a href=''><img src='assets/share.jpg' /></a></li></ul></div>");
+		    //$(".mainPage #loader").load("pages/hymn"+id+".html");
+		  });
 
 	},
 	makeDropdown(){
@@ -146,8 +209,7 @@ var app = {
 	        $tbody.append($row);
 	      }
 	      $toc.append($tbody);
-	        
-	      console.log("dataTable: " + typeof dataTable)
+
 	      $("#tocWrap").append($toc);
 	      $('#toc').dataTable().fnDestroy();
 	      $("#toc").dataTable({
@@ -159,7 +221,7 @@ var app = {
 	      });
 
 	      if(hymn==0) {
-	        startRandom();
+	        app.startRandom();
 	      } else {
 	        $("#hymnSelect").val(hymn).change();
 	      }
@@ -168,6 +230,29 @@ var app = {
 	    // false
 	  }
 
+	},
+	startRandom: function(){
+
+	  var startVal;
+	  var random;
+	  var min=1;
+	  var max = 191;
+	  random = Math.floor(Math.random() * (max - min +1)) + min;
+	  startVal = random;
+
+
+	  var pre = "";
+	  if(startVal<100) {
+	    pre="0";
+	  }
+	  if(startVal<10){
+	    pre="00";
+	  }
+	  startVal = pre + "" +startVal;
+
+	  //startVal=1;
+	  $("#hymnSelect").val(startVal).change();
+	  console.log("start "+startVal);
 	},
 	initJplayer: function(){
 		var player = $("#jquery_jplayer_1").jPlayer({
