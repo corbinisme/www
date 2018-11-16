@@ -141,27 +141,6 @@ $(document).ready(function(){
 
   
   var hymn = 1;
-  var player = $("#jquery_jplayer_1").jPlayer({
-      /*
-      ready: function () {
-        $(this).jPlayer("setMedia", {
-          title: "Hymn",
-          mp3: hymn
-        });
-        
-      },
-      */
-      swfPath: "dist/jplayer",
-      supplied: "mp3",
-      wmode: "window",
-      useStateClassSkin: true,
-      autoBlur: false,
-      smoothPlayBar: true,
-      autoPlay: true,
-      keyEnabled: true,
-      remainingDuration: true,
-      toggleDuration: true
-    });
   
   //makeDropdown(lang, 0);
   

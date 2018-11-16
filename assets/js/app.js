@@ -7,7 +7,13 @@ function redirectToSystemBrowser(url) {
 
 var languageMap = {
 	"en":"English",
+	"fr": "Français",
+	"de": "Deutsch",
+	"es": "Español",
+	"pg": "Português",
+	"asl": "ASL English"
 };
+
 
 var app = {
 	brand: "",
@@ -17,7 +23,7 @@ var app = {
 	init: function(){
 		app.getConfig();
 		app.eventBindings();
-		//app.initJplayer();
+		app.initJplayer();
 		app.makeDropdown();
 	},
 	getConfig: function(){
@@ -37,7 +43,7 @@ var app = {
 	      $("body").toggleClass("dim");
 
 	    });
-	    
+
 	    $(".custom-btns a").on("click", function(){
 	      $(".custom-btns a").removeClass("current");
 	      $(this).toggleClass("current");
@@ -201,7 +207,7 @@ var app = {
 				var $li = $(document.createElement("li"));
 				var $a = $(document.createElement("a"));
 				$a.attr("rel", thisLang);
-				$a.html(thisLang + " : " + languageMap[thisLang]);
+				$a.html(languageMap[thisLang]);
 
 				$li.append($a);
 				$target.append($li);
