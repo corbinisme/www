@@ -103,6 +103,7 @@ var title_de = [
 "102) Allm&auml;cht&rsquo;ger Gott, f&uuml;hr uns mit starker Hand",
 "103) Nicht aufgrund eigner Kraft",
 "104) Verborgen ist der Tag",
+"105) Botschafter an Christi Statt",
 "106) Von der Liebe tief durchdrungen",
 "107) Um nichts seid besorgt",
 "108) Gottes Auserw&auml;hlte",
