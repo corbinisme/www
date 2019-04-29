@@ -128,7 +128,7 @@ var title_en = [
 "127)  We Will Glorify",
 "128) Glorious Things of Thee Are Spoken",
 "129) How Great Thou Art",
-"130) Praise Ye the Lord, the Almighty",
+"130) To God Be The Glory",
 "131) O Worship the King",
 "132) How Good and How Pleasant",
 "133) We are God's People",
