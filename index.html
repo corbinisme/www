@@ -30,7 +30,7 @@
         -->
 
   
-  <title>COGWA Hymnal</title>
+  <title>[brand] Hymnal</title>
 
   <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
 -->
@@ -42,18 +42,18 @@
         
        
 
-   <link rel="stylesheet" href="assets/fixpack.css" />
-   <link rel="stylesheet" href="assets/reset.css">
+   <link rel="stylesheet" href="assets/css/fixpack.css" />
+   <link rel="stylesheet" href="assets/css/reset.css">
    <link rel="stylesheet" href="assets/font-awesome.min.css" />
-   <link rel="stylesheet" href="assets/style.css">
+   <link rel="stylesheet" href="assets/css/style.css">
    
    <link href="jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
    <link rel="stylesheet" href="assets/jplayer/jplayer.css" />
-   <link rel="stylesheet" href="assets/jquery.dataTables.css" >
+   <link rel="stylesheet" href="assets/css/jquery.dataTables.css" >
    <meta name="og:image" content="icon.png" />
 
 </head>
-<body class="cogwa">
+<body class="ucg">
 
 <header class="headerTop mainPage" >
     <div class="ui-bar ui-bar-a">
@@ -61,7 +61,7 @@
         <li class="first"><a href="javascript:;" class="hamburger">&equiv;</a></li>
         <li class="currentApp custom-btns">
           <h1 class="lefty">
-          <span>COGWA Hymnal</span>
+          <span id="brand"><em>UCG</em> Hymnal</span>
           <a href="javascript:;" class="left" id="information">
               <span class="fa fa-info-circle"></span></a>
           </h1>
@@ -71,7 +71,9 @@
         <li class="custom-btns"><a href="javascript:;">
           <span class="fa fa-cog"></span></a>
         </li>
+
       -->
+      
     
         <li class="custom-btns">
             <a href="javascript:;" class="searcher" id="searcher">
@@ -126,7 +128,7 @@
  
   <div role="content" class="main ui-content">
     <div id="loader">
-      <a href="index.html" class="loadSpinner"><span class="fa fa-spinner"></span></a>
+      <a href="index.html" class="loadSpinner"><span class="fa fa-spinner fa-spin"></span></a>
     </div>
     <div id="sunsetContent"></div>
     <div id="holyDayContent">
@@ -159,30 +161,12 @@
                 <div class="jp-play-bar"></div>
               </div>
             </div>
-            <!--<div class="jp-volume-controls">
-              <button class="jp-mute" role="button" tabindex="0">mute</button>
-              <button class="jp-volume-max" role="button" tabindex="0">max volume</button>
-              <div class="jp-volume-bar">
-                <div class="jp-volume-bar-value"></div>
-              </div>
-            </div>-->
+           
             <div class="jp-time-holder">
-              <!--
-              <div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
-              <div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
-            -->
-              <!--
-              <div class="jp-toggles">
-                <button class="jp-repeat" role="button" tabindex="0">repeat</button>
-              </div>
-            -->
+             
             </div>
           </div>
-          <!--
-          <div class="jp-details">
-            <div class="jp-title" aria-label="title">&nbsp;</div>
-          </div>
-        -->
+          
           <div class="jp-no-solution">
             <span>Update Required</span>
             To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
@@ -280,7 +264,8 @@
 </div>
   <script type="text/javascript" src="cordova.js"></script>
  
- <script src="assets/jquery-1.9.min.js"></script>
+ <script src="assets/js/jquery-1.9.min.js"></script>
+ <script src="config.js"></script>
  <script>
 
  var env="localhost";
@@ -298,14 +283,16 @@
   <script src="lang/fr/lyrics.js"></script>
   <script src="lang/de/lyrics.js"></script>
 
-  <script src="assets/main.js" type="text/javascript"></script>
-  <script src="assets/jquery-ui.js"></script>
-  <script src="assets/autocomplete.js"></script>
+  <script src="assets/js/main.js" type="text/javascript"></script>
+  
+  <script src="assets/js/jquery-ui.js"></script>
+  <script src="assets/js/autocomplete.js"></script>
 
   <script type="text/javascript" src="jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
 
 
-<script src="assets/dataTables.js"></script>
+<script src="assets/js/dataTables.js"></script>
+<script src="assets/js/app.js" type="text/javascript"></script>
 <script>
 
 </script>
