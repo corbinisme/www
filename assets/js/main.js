@@ -29,8 +29,6 @@ function submitNum(){
 }
 var path = "http://members.ucg.org/files/hymnal/hymnal/";
 path = config.path;
-alert(path)
-
 
 var espXML ={};
 var frXML = {};
