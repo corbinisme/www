@@ -1,5 +1,6 @@
 var config = {
-	brand: "ucg",
-	langs: "en,de,pg,es,asl,fr",
-	icon: "icon.png"
+	brand: "cogwa",
+	langs: "en,es",
+	icon: "brands/cogwa/icon.png",
+	path: "http://corbdesign.com/bucket/cogwa/hymns/"
 }

@@ -27,12 +27,10 @@ function submitNum(){
   $("#nums").blur();
   $("#musicPlayer").hide();
 }
-var path ="";
-if(env!="ucg") {
-  path = "http://members.ucg.org/files/hymnal/hymnal/";
-} else {
-  path = "http://corbdesign.com/bucket/HYMNAL/";
-}
+var path = "http://members.ucg.org/files/hymnal/hymnal/";
+path = config.path;
+alert(path)
+
 
 var espXML ={};
 var frXML = {};
@@ -140,11 +138,7 @@ $(document).ready(function(){
             var songname = hymnNum;
             
         // get new source files for cogwa!
-        if($("body").hasClass("cogwa")){
-          var pathTemplate = "http://corbdesign.com/bucket/cogwa/hymns/"
-        } else {
-          var pathTemplate = "http://streaming.ucg.org/files/hymnal/hymnal/accompany/mp3/";
-        }
+        pathTemplate = path;
         if(hymnNum){
             hymn = pathTemplate + hymnNum + ".mp3";
         } else {

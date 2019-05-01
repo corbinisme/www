@@ -275,10 +275,10 @@ if(isset($_REQUEST['c'])){
   <script type="text/javascript" src="cordova.js"></script>
  
  <script src="assets/js/jquery-1.9.min.js"></script>
- <script src="config.js"></script>
+ <script src="config_<?php echo $title;?>.js"></script>
 
  <script>
-config.brand = "<?php echo $title;?>";
+
   var env="localhost";
 
 <?php if(isset($_REQUEST['lang'])){
@@ -302,25 +302,32 @@ if(isset($_REQUEST['hymn'])){
  </script>
 
 
-  <script src="lang/en/<?php echo $title . "_"; ?>list.js"></script>
-  <script src="lang/es/<?php echo $title . "_"; ?>list.js"></script>
-  <script src="lang/pg/<?php echo $title . "_"; ?>list.js"></script>
-  <script src="lang/fr/<?php echo $title . "_"; ?>list.js"></script>
-  <script src="lang/de/<?php echo $title . "_"; ?>list.js"></script>
+  <script src="lang/en/list_<?php echo $title; ?>.js"></script>
+  <?php if($title=="ucg"){?>
+  <script src="lang/es/list_<?php echo $title; ?>.js"></script>
+  <script src="lang/pg/list_<?php echo $title; ?>.js"></script>
+  <script src="lang/fr/list_<?php echo $title; ?>.js"></script>
+  <script src="lang/de/list_<?php echo $title; ?>.js"></script>
+  <?php }?>
 
 
-  <script src="lang/en/<?php echo $title . "_"; ?>lyrics.js"></script>
-  <script src="lang/es/<?php echo $title . "_"; ?>lyrics2.js"></script>
-  <script src="lang/pg/<?php echo $title . "_"; ?>lyrics.js"></script>
-  <script src="lang/fr/<?php echo $title . "_"; ?>lyrics.js"></script>
-  <script src="lang/de/<?php echo $title . "_"; ?>lyrics.js"></script>
+  <script src="lang/en/lyrics_<?php echo $title;?>.js"></script>
+  <?php if($title=="ucg"){?>
+  <script src="lang/es/lyrics_<?php echo $title;?>.js"></script>
+  <script src="lang/pg/lyrics_<?php echo $title;?>.js"></script>
+  <script src="lang/fr/lyrics_<?php echo $title;?>.js"></script>
+  <script src="lang/de/lyrics_<?php echo $title;?>.js"></script>
+  <?php }?>
 
-  <script src="assets/js/main.js" type="text/javascript"></script>
+  <script src="assets/js/main.js" 
+    type="text/javascript"></script>
   
   <script src="assets/js/jquery-ui.js"></script>
   <script src="assets/js/autocomplete.js"></script>
 
-  <script type="text/javascript" src="jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
+  <script type="text/javascript" 
+    src="jplayer/dist/jplayer/jquery.jplayer.min.js">
+  </script>
 
 
 <script src="assets/js/dataTables.js"></script>
