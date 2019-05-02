@@ -232,13 +232,16 @@ var app = {
 
 	},
 	startRandom: function(){
-
-	  var startVal;
-	  var random;
-	  var min=1;
-	  var max = 191;
-	  random = Math.floor(Math.random() * (max - min +1)) + min;
-	  startVal = random;
+	  if(typeof start=="undefined"){
+		  var startVal;
+		  var random;
+		  var min=1;
+		  var max = 191;
+		  random = Math.floor(Math.random() * (max - min +1)) + min;
+		  startVal = random;
+	  } else {
+	  	var startVal = start;
+	  }
 
 
 	  var pre = "";
