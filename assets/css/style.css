@@ -671,6 +671,7 @@ ul.tabs {
 
 
 /* themes */
+.cogwa .first, .cogwa #information {display: none;}
 .cogwa .headerTop .ui-bar {
   background-color: #9A816A;
 }
