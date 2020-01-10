@@ -234,7 +234,7 @@ $(document).ready(function(){
     $(this).addClass("active");
     $("#musicPlayer").hide();
     
-    lang = $(this).attr("rel");
+    app.lang = $(this).attr("rel");
     
     var returnHymn = $("#hymnSelect").val();
     makeDropdown(lang, returnHymn);

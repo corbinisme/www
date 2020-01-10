@@ -20,6 +20,7 @@ var app = {
 	lang: "en",
 	languages: null,
 	hymn: 1,
+	storage: null,
 	init: function(){
 		app.getConfig();
 		app.eventBindings();
@@ -28,12 +29,36 @@ var app = {
 
 		app.startRandom();
 	},
+	changeStorage:function(key,val){
+		app.storage.setItem(key, val);
+	},
 	getConfig: function(){
 		app.brand = config.brand;
 	  	$("#brand em").text(app.brand);
 	  	$("title").html(app.brand + " hymnal");
 
 	  	var langs = config.langs;
+
+	  	app.storage = window.localStorage;
+		var langKey = "lang";
+		var langValue = app.storage.getItem(langKey); // Pass a key name to get its value.
+		//var value =app.lang;
+		if(langValue==null){
+			langValue = app.lang;
+			app.storage.setItem(langKey, langValue)
+		}
+		app.lang = langValue;
+		var fontKey = "size";
+		var fontSize = app.storage.getItem(fontKey);
+		if(fontSize==null){
+			fontSize = "17";
+			app.storage.setItem(fontKey, fontSize)
+		}
+		console.log(app.storage)
+		 // Pass a key name and its value to add or update that key.
+		//storage.removeItem(key) // Pass a key name to remove that key from storage.
+
+
 	  	app.languages = langs.split(",").sort();
 	  	app.makeLanguageDropdown();
 	  	// set languages
@@ -104,15 +129,15 @@ var app = {
 		    var id = $(this).val();
 		    var file = "hymn"+id;
 		    // get language support
-		    console.log(id + " and " + lang);
-		    if(lang=='es'){
+		    console.log(id + " and " + app.lang);
+		    if(app.lang=='es'){
 		      var result = lyrics_es[file];
 		      if(result){
 		        $(".mainPage #loader").html(result);
 		      } else {
 		        $(".mainPage #loader").html("Select a hymn!");
 		      }
-		    } else if(lang=='fr'){
+		    } else if(app.lang=='fr'){
 		      var result = lyrics_fr[file];
 		      if(result){
 		        $(".mainPage #loader").html(result);
@@ -120,14 +145,14 @@ var app = {
 		        $(".mainPage #loader").html("Select a hymn!");
 		      }
 
-		    } else if(lang=='pg'){
+		    } else if(app.lang=='pg'){
 		      var result = lyrics_pg[file];
 		      if(result){
 		        $(".mainPage #loader").html(result);
 		      } else {
 		        $(".mainPage #loader").html("Select a hymn!");
 		      }
-		    }  else if(lang=='de'){
+		    }  else if(app.lang=='de'){
 		      var result = lyrics_de[file];
 		      if(result){
 		        $(".mainPage #loader").html(result);
