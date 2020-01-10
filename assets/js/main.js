@@ -5,16 +5,13 @@ function redirectToSystemBrowser(url) {
   var ref = window.open(encodeURI(url), '_system', 'location=yes');  
 }
 var brand = "";
-var lang = "en";
+//var lang = "en";
 
 function setConfig(){
   brand = config.brand;
   $("#brand em").text(brand);
   $("title").html(brand + " hymnal");
 }
-
-
-
 
 function footerPlace() {
   var height = $(window).height(); 
@@ -114,74 +111,67 @@ function loadSearch(num){
 }
 $(document).ready(function(){
 
-  
   var hymn = 1;
-  
-  //makeDropdown(lang, 0);
-  
-    
-    $(".musicIcon").on("click", function(){
+  $(".musicIcon").on("click", function(){
 
-       if($("#musicPlayer").is(":visible")) {
-          $("#musicPlayer").hide();
-
-      } else{
+  if($("#musicPlayer").is(":visible")) {
+    $("#musicPlayer").hide();
+  } else{
           
-      $("#musicPlayer").show();
+    $("#musicPlayer").show();
 
-
-            var hymnNum = $("#hymnSelect").val();
-            var title = $("#hymnSelect option[value="+hymnNum+"]").html();
-            title = title.substring(title.indexOf(")")+1, title.length);
-            var songname = hymnNum;
-            
-        // get new source files for cogwa!
-        pathTemplate = path;
-        if(hymnNum){
-            hymn = pathTemplate + hymnNum + ".mp3";
-        } else {
-            hymn = pathTemplate + "001" + ".mp3";
-            //alert("no hymn selected");
-        }
-
-         $('#jquery_jplayer_1').jPlayer('setMedia', {
-            mp3: hymn
-         }).jPlayer("play");
-
-          }
-      });
-
-    $(".shareClose").on("click", function(){
-      $("#home").show();
-      $("#sharePage").hide();
-      $(".custom-btns a").removeClass("current");
-      $("#musicPlayer").hide();
-      $("#search").hide();
-      $("#copyrightPage").hide();
-      $("#numSearch").hide();
-      $(".hymnalSelection").show();
-    });
+    var hymnNum = $("#hymnSelect").val();
+    var title = $("#hymnSelect option[value="+hymnNum+"]").html();
+    title = title.substring(title.indexOf(")")+1, title.length);
+    var songname = hymnNum;
     
-    $(".tabs li a").on("click", function(){
-        $par = $(this).parent();
-        $(".tabs li").removeClass("current");
-        $par.addClass("current");
-        var which = $(this).attr("id");
-        which= which.substring(0, which.length-3);
-        $(".tabContent").removeClass("active");
-        $("#"+which).addClass("active");
-        if(which == "copyright") {
-          $("#copyright").load("copyright.html");
-        } else {
-          $("#aboutText").load("about.html");
-        }
+    // get new source files for cogwa!
+    pathTemplate = path;
+    if(hymnNum){
+        hymn = pathTemplate + hymnNum + ".mp3";
+    } else {
+        hymn = pathTemplate + "001" + ".mp3";
+        //alert("no hymn selected");
+    }
 
-    });
+     $('#jquery_jplayer_1').jPlayer('setMedia', {
+        mp3: hymn
+     }).jPlayer("play");
+
+      }
+});
+
+  $(".shareClose").on("click", function(){
+    $("#home").show();
+    $("#sharePage").hide();
+    $(".custom-btns a").removeClass("current");
+    $("#musicPlayer").hide();
+    $("#search").hide();
+    $("#copyrightPage").hide();
+    $("#numSearch").hide();
+    $(".hymnalSelection").show();
+  });
   
-    $(".overlay").on("click", function(){
-      $(this).parent().hide();
-      $(".custom-btns a").removeClass("current");
-    });
+  $(".tabs li a").on("click", function(){
+      $par = $(this).parent();
+      $(".tabs li").removeClass("current");
+      $par.addClass("current");
+      var which = $(this).attr("id");
+      which= which.substring(0, which.length-3);
+      $(".tabContent").removeClass("active");
+      $("#"+which).addClass("active");
+      if(which == "copyright") {
+        $("#copyright").load("copyright.html");
+      } else {
+        $("#aboutText").load("about.html");
+      }
+
+  });
+
+  $(".overlay").on("click", function(){
+    $(this).parent().hide();
+    $(".custom-btns a").removeClass("current");
+  });
 
 
 
@@ -235,9 +225,10 @@ $(document).ready(function(){
     $("#musicPlayer").hide();
     
     app.lang = $(this).attr("rel");
+    app.storage.setItem("lang", app.lang);
     
     var returnHymn = $("#hymnSelect").val();
-    makeDropdown(lang, returnHymn);
+    makeDropdown(app.lang, returnHymn);
    // console.log(lang + " | " + returnHymn);
     $("#hymnSelect").val(returnHymn).change();
 
@@ -248,14 +239,28 @@ $(document).ready(function(){
 
   $("footer a.textSize").on("click", function(){
       var $context = $(".ui-content");
-      var size = $context.css("fontSize");
-      size = size.substring(0, size.length-2);
-      size = parseInt(size,10);
+      var size = $context.css("font-size");
+      if(typeof size=="string"){
+        size = size.substring(0, size.length-2);
+        size = parseInt(size,10);
+      } else {
+        size = app.size;
+      }
+      
       if($(this).hasClass("smallerText"))  {
         size -=1;
       } else {
         size+=1;
       }
+
+      if(size<8){
+        size = 8;
+      }
+      if(size>70){
+        size = 70;
+      }
+      app.size = size;
+      app.storage.setItem("size", app.size);
       $context.css("fontSize", size+"px");
   });
 

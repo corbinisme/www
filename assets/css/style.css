@@ -11,7 +11,7 @@ body {
   overflow: hidden;
 }
 
-body.dim, .dim .main{background: #000; color: #ccc;}
+body.dim, .dim .main{background: #000; color: #ddd;}
 .dim #footerBot {opacity: 0.8; background: #222;}
 .dim .ui-bar-b {background: #444; border-color: #000;}
 
@@ -281,7 +281,7 @@ a.hiddenLink {
 }
 
 #loader {
-  padding-top: 1em;
+  padding-top: 20px;
   position: relative;
   z-index: 1;
 }
@@ -701,4 +701,45 @@ ul.tabs {
 }
 .cogwa.dim  .navvy a.hamburger {
   background-color: #2f2923;
+}
+
+.dim #hymnSelect {
+  background-color: #333;
+  border-color: #111;
+  color:#eee;
+}
+
+.dim #numSearch .wrapForm, .dim #search .searchWrap {
+  background-color: #000;
+}
+.dim #toc th {
+  background: #333;
+}
+.dim #toc .even td {
+  background: #111;
+}
+.dim #toc .odd td {
+  background: #000;
+}
+.dim #toc td a {
+  color: #eee;
+}
+
+.dim .searchWrapper table.dataTable tbody tr td {
+  border-color: #000;
+}
+
+#toc_filter {
+  margin: 0;
+}
+
+body table.dataTable thead .sorting,
+body table.dataTable thead .sorting_asc,
+body table.dataTable thead .sorting_desc {
+  background-image: none;
+}
+
+.dim #toc th.sorting_asc,
+.dim #toc th.sorting_desc {
+  background: #585858;
 }

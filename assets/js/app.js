@@ -18,6 +18,8 @@ var languageMap = {
 var app = {
 	brand: "",
 	lang: "en",
+	size: 16,
+	contrast: "false",
 	languages: null,
 	hymn: 1,
 	storage: null,
@@ -54,8 +56,22 @@ var app = {
 			fontSize = "17";
 			app.storage.setItem(fontKey, fontSize)
 		}
-		console.log(app.storage)
-		 // Pass a key name and its value to add or update that key.
+		app.size = fontSize;
+		$(".main.ui-content").css("font-size", app.size + "px");
+
+		var contrastKey = "contrast";
+		var contrastVal = app.storage.getItem(contrastKey);
+		if(contrastVal==null){
+			contrastVal = "false";
+			app.storage.setItem(contrastKey, contrastVal)
+		}
+		app.contrast = contrastVal;
+		if(app.contrast=="true"){
+			$("body").addClass("dim");
+		}
+
+		//console.log(app.storage)
+		// Pass a key name and its value to add or update that key.
 		//storage.removeItem(key) // Pass a key name to remove that key from storage.
 
 
@@ -68,7 +84,11 @@ var app = {
 		// contrast icon
 	    $(".contrastIcon").on("click", function(){
 	      $("body").toggleClass("dim");
-
+	      contrastValue = false;
+	      if($("body").hasClass("dim")){
+	      	contrastValue = true;
+	      }
+	      app.storage.setItem("contrast", contrastValue);
 	    });
 
 	    // language selector
@@ -129,7 +149,7 @@ var app = {
 		    var id = $(this).val();
 		    var file = "hymn"+id;
 		    // get language support
-		    console.log(id + " and " + app.lang);
+		    //console.log(id + " and " + app.lang);
 		    if(app.lang=='es'){
 		      var result = lyrics_es[file];
 		      if(result){
@@ -280,7 +300,7 @@ var app = {
 
 	  //startVal=1;
 	  $("#hymnSelect").val(startVal).change();
-	  console.log("start "+startVal);
+	  //console.log("start "+startVal);
 	},
 	initJplayer: function(){
 		var player = $("#jquery_jplayer_1").jPlayer({
@@ -306,7 +326,7 @@ var app = {
 	  });
 	},
 	makeLanguageDropdown: function(){
-		console.log(app.languages);
+		//console.log(app.languages);
 		if(app.languages.length==1){
 			// only english
 			// hide dropdown
@@ -316,7 +336,7 @@ var app = {
 			$target.html("");
 			for(var i=0;i<app.languages.length; i++){
 				var thisLang = app.languages[i];
-				console.log(app.languages[i]);
+				//console.log(app.languages[i]);
 				var $li = $(document.createElement("li"));
 				var $a = $(document.createElement("a"));
 				$a.attr("rel", thisLang);
