@@ -70,6 +70,17 @@ var app = {
 			$("body").addClass("dim");
 		}
 
+
+		if(config.icon!=""){
+			var icon = config.icon;
+		    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+		    link.type = 'image/x-icon';
+		    link.rel = 'shortcut icon';
+		    link.href = icon;
+		    document.getElementsByTagName('head')[0].appendChild(link);
+		}
+
+
 		//console.log(app.storage)
 		// Pass a key name and its value to add or update that key.
 		//storage.removeItem(key) // Pass a key name to remove that key from storage.
@@ -159,6 +170,7 @@ var app = {
 		      }
 		    } else if(app.lang=='fr'){
 		      var result = lyrics_fr[file];
+
 		      if(result){
 		        $(".mainPage #loader").html(result);
 		      } else {

@@ -743,3 +743,7 @@ body table.dataTable thead .sorting_desc {
 .dim #toc th.sorting_desc {
   background: #585858;
 }
+
+.cgi #information {
+  display: none
+}

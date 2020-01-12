@@ -24,8 +24,8 @@ function submitNum(){
   $("#nums").blur();
   $("#musicPlayer").hide();
 }
-var path = "http://members.ucg.org/files/hymnal/hymnal/";
-path = config.path;
+var path = "http://streaming.ucg.org/files/hymnal/hymnal/accompany/mp3/";
+//path = config.path;
 
 var espXML ={};
 var frXML = {};
