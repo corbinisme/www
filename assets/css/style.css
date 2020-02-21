@@ -747,3 +747,7 @@ body table.dataTable thead .sorting_desc {
 .cgi #information {
   display: none
 }
+
+#brand em {
+  text-transform: uppercase;
+}
