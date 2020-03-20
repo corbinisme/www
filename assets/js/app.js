@@ -243,7 +243,8 @@ var app = {
 					        mp3: hymn
 					     }).jPlayer("play");
 					 } else {
-
+					 	alert("Vocal version of this song not included due to copyright");
+					 	$(this).removeClass("active");
 					 }
 
 				}
