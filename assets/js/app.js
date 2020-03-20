@@ -5,6 +5,16 @@ function redirectToSystemBrowser(url) {
   var ref = window.open(encodeURI(url), '_system', 'location=yes');  
 }
 
+var hymn = 1;
+var brand = "";
+var espXML ={};
+var frXML = {};
+var deXML = {};
+var pgXML = {};
+var aslXML = {};
+var path = config.path;
+var vocal_path = "https://hymnal.corbinrose.com/hymns-vocal/";
+
 var languageMap = {
 	"en":"English",
 	"fr": "Français",
@@ -22,6 +32,7 @@ var app = {
 	contrast: "false",
 	languages: null,
 	hymn: 1,
+	novocal: [100,115,121,124,127,129,133,136,147,171,183,186],
 	storage: null,
 	init: function(){
 		app.getConfig();
@@ -154,11 +165,97 @@ var app = {
 
 	    });
 
+	    $("#music").on("click", function(){
+	    	$("#musicPlayer").toggleClass("active");
+	    	$("#musicVocal").removeClass("active");
+			$(this).toggleClass("active");
+			if(!$(this).hasClass("active")) {
+
+			    	$("#musicPlayer").hide();
+			    	$('#jquery_jplayer_1').jPlayer("stop")
+
+			  } else {
+		          $('#jquery_jplayer_1').jPlayer("stop")
+			    $("#musicPlayer").show();
+
+			    var hymnNum = $("#hymnSelect").val();
+			    var title = $("#hymnSelect option[value="+hymnNum+"]").html();
+			    title = title.substring(title.indexOf(")")+1, title.length);
+			    var songname = hymnNum;
+			    
+			    // get new source files for cogwa!
+			    pathTemplate = path;
+			    if(hymnNum){
+			        hymn = pathTemplate + hymnNum + ".mp3";
+			    } else {
+			        hymn = pathTemplate + "001" + ".mp3";
+			        //alert("no hymn selected");
+			    }
+
+			     $('#jquery_jplayer_1').jPlayer('setMedia', {
+			        mp3: hymn
+			     }).jPlayer("play");
+
+			}
+		});
+
+		$("#musicVocal").on("click", function(){
+			$("#musicPlayer").toggleClass("active");
+			$("#music").removeClass("active");
+			$(this).toggleClass("active");
+
+			var hymnNum = $("#hymnSelect").val();
+			var isValid = true;
+			for(var j=0; j<app.novocal.length; j++){
+				
+				if(app.novocal[j].toString() == hymnNum){
+					isValid=false;
+				}
+			}
+			  if(!$(this).hasClass("active")) {
+
+			    	$("#musicPlayer").hide();
+			    	$('#jquery_jplayer_1').jPlayer("stop")
+
+			  } else {
+			        
+			  		if(isValid){
+			  			$('#jquery_jplayer_1').jPlayer("stop")
+					    $("#musicPlayer").show();
+
+					    
+
+
+					    var title = $("#hymnSelect option[value="+hymnNum+"]").html();
+					    title = title.substring(title.indexOf(")")+1, title.length);
+					    var songname = hymnNum;
+					    
+					    // get new source files for cogwa!
+					    pathTemplate = vocal_path;
+					    if(hymnNum){
+					        hymn = pathTemplate + hymnNum + ".mp3";
+					    } else {
+					        hymn = pathTemplate + "001" + ".mp3";
+					        //alert("no hymn selected");
+					    }
+
+					     $('#jquery_jplayer_1').jPlayer('setMedia', {
+					        mp3: hymn
+					     }).jPlayer("play");
+					 } else {
+
+					 }
+
+				}
+		});
 
 	    // dropdown hymn selector
 	    $(".mainPage #hymnSelect").change(function(){
 		    var id = $(this).val();
 		    var file = "hymn"+id;
+		    $("#sharePage").hide();
+		    $(".musicIcon").removeClass("active");
+		    $('#jquery_jplayer_1').jPlayer("stop")
 		    // get language support
 		    //console.log(id + " and " + app.lang);
 		    if(app.lang=='es'){
@@ -213,6 +310,162 @@ var app = {
 		    //$(".mainPage #loader").load("pages/hymn"+id+".html");
 		  });
 
+
+    $(".shareClose").on("click", function(){
+	    $("#home").show();
+	    $("#sharePage").hide();
+	    $(".custom-btns a").removeClass("current");
+	    $("#musicPlayer").hide();
+	    $("#search").hide();
+	    $("#copyrightPage").hide();
+	    $("#numSearch").hide();
+	    $(".hymnalSelection").show();
+	});
+  
+  $(".tabs li a").on("click", function(){
+      $par = $(this).parent();
+      $(".tabs li").removeClass("current");
+      $par.addClass("current");
+      var which = $(this).attr("id");
+      which= which.substring(0, which.length-3);
+      $(".tabContent").removeClass("active");
+      $("#"+which).addClass("active");
+      if(which == "copyright") {
+        $("#copyright").load("copyright.html");
+      } else {
+        $("#aboutText").load("about.html");
+      }
+
+  });
+
+  $(".overlay").on("click", function(){
+    $(this).parent().hide();
+    $(".custom-btns a").removeClass("current");
+  });
+
+
+
+     $('#formByNum').on("submit", function (evt) {
+
+      evt.preventDefault();
+      var variable = $("#nums").val();
+      $("#musicPlayer").hide();
+      //alert(variable);
+      variable = parseInt(variable,10);
+      var prepend="";
+      if(variable<192&&variable>0) {
+        if(variable<100) {
+          prepend="0";
+        }
+        if(variable<10) {
+          prepend="00";
+        }
+        variable = prepend + variable;
+        $("#hymnSelect").val(variable).change();
+        $("#numSearch").hide();
+        $(".custom-btns a").removeClass("current");
+        $("#nums").blur();
+        $("#home").show();
+        $(".hymnalSelection").show();
+      } else {
+        //alert("try again");
+        $("#nums").val("").focus();
+      }
+      return false;
+  });
+  
+ 
+  $(".hamburger").on("click", function(){
+    $(this).toggleClass("highlight");
+    $(".dropdown").toggle();
+
+    $("#byNumber, #searcher").removeClass("current");
+        $("#numSearch").hide();
+        $("#search").hide();
+        $(".hymnalSelection").show();
+        //$("#footerBot").show();
+  });
+
+  $(".dropdown li a").on("click", function(){
+    //$(".currentApp h1 span").html($(this).attr("rel"));
+    $(".dropdown").removeClass("open").hide();
+
+    $(".dropdown li a").removeClass("active");
+    $(this).addClass("active");
+    $("#musicPlayer").hide();
+    
+    app.lang = $(this).attr("rel");
+    app.storage.setItem("lang", app.lang);
+    
+    var returnHymn = $("#hymnSelect").val();
+    app.makeDropdown(app.lang, returnHymn);
+   // console.log(lang + " | " + returnHymn);
+    $("#hymnSelect").val(returnHymn).change();
+
+  });
+  
+
+  
+
+  $("footer a.textSize").on("click", function(){
+      var $context = $(".ui-content");
+      var size = $context.css("font-size");
+      if(typeof size=="string"){
+        size = size.substring(0, size.length-2);
+        size = parseInt(size,10);
+      } else {
+        size = app.size;
+      }
+      
+      if($(this).hasClass("smallerText"))  {
+        size -=1;
+      } else {
+        size+=1;
+      }
+
+      if(size<8){
+        size = 8;
+      }
+      if(size>70){
+        size = 70;
+      }
+      app.size = size;
+      app.storage.setItem("size", app.size);
+      $context.css("fontSize", size+"px");
+  });
+
+   $( "#searchField" ).autocomplete({
+      source: searchArray,
+      select: function(event, ui){
+        var match = ui.item.value;
+        var value=0;
+        var numVal = match.substring(match.indexOf("(")+1, match.length-1);
+        var variable = parseInt(numVal, 10);
+      
+
+        var prepend="";
+        if(variable<100) {
+          prepend="0";
+        }
+        if(variable<10) {
+          prepend="00";
+        }
+        variable = prepend + variable;
+
+        $("#hymnSelect").val(variable).change();
+        $("#searchField").blur();
+        $("#home").show();
+        $("#search").hide();
+        $(".custom-btns a").removeClass("current");
+        $( "body, html" ).scrollTop( 0 );
+      }
+    });
+
+
+	},
+	loadSearch: function(num){
+	  $("#loader2 .shareClose").click();
+	  $("#hymnSelect").val(num).change();
 	},
 	makeDropdown(){
 	  var lang = app.lang;
@@ -256,7 +509,7 @@ var app = {
 	        name = name.substring(name.indexOf(")")+2,name.length);
 	        $firstCell = $(document.createElement("td"));
 	        $link = $(document.createElement("a"));
-	        $link.attr("href", "javascript:loadSearch('"+num+"');").html(name).addClass("searchLink");
+	        $link.attr("href", "javascript:app.loadSearch('"+num+"');").html(name).addClass("searchLink");
 	        $firstCell.append($link);
 
 	        $lastCell = $(document.createElement("td"));

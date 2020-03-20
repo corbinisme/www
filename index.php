@@ -148,13 +148,37 @@ if(isset($_REQUEST['c'])){
 
   <footer id="footerBot">
     <ul>
-       <li>
+      <?php if($title=="ucg"){
+        ?>
+        <li class="extraLink">
+        <a href="javascript:;" class="shareIcon contrastIcon" id="contrast">
+          <span class="fa fa-lightbulb-o"></span>
+        </a>
+      
+        <div class="btn-group">
+          <a href="javascript:;" class="musicIcon shareIcon" id="music">
+            <span class="fa fa-music"></span>
+          </a>
+          <a href="javascript:;" class="musicIcon shareIcon" id="musicVocal">
+            <span class="fa fa-users"></span>
+          </a>
+        </div>
+      </li>
+      <?php
+
+      } else {
+        ?>
+         <li>
         <a href="javascript:;" class="shareIcon contrastIcon" id="contrast">
           <span class="fa fa-lightbulb-o"></span></a>
       </li>
       <li>
         <a href="javascript:;" class="musicIcon shareIcon" id="music"><span class="fa fa-music"></span></a>
       </li>
+      <?php
+      }
+      ?>
+      
       <li class="musicCell">
         <div class="musicPlayer" id="musicPlayer">
     
