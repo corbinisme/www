@@ -24,6 +24,25 @@ var languageMap = {
 	"asl": "ASL English"
 };
 
+var browserLang = navigator.language;
+var langOverride = "";
+if(browserLang.indexOf("en")>-1){
+	langOverride = "en";
+}
+if(browserLang.indexOf("fr")>-1){
+	langOverride = "fr";
+}
+if(browserLang.indexOf("de")>-1){
+	langOverride = "de";
+}
+if(browserLang.indexOf("es")>-1){
+	langOverride = "es";
+}
+if(browserLang.indexOf("pg")>-1){
+	langOverride = "pg";
+}
+
+
 
 var app = {
 	brand: "",
@@ -57,7 +76,12 @@ var app = {
 		var langValue = app.storage.getItem(langKey); // Pass a key name to get its value.
 		//var value =app.lang;
 		if(langValue==null){
-			langValue = app.lang;
+			
+			if(langOverride!==""){
+				langValue = langOverride;
+			} else {
+				langValue = app.lang;
+			}
 			app.storage.setItem(langKey, langValue)
 		}
 		app.lang = langValue;
