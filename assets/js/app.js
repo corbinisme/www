@@ -75,7 +75,7 @@ var app = {
 		var langKey = "lang";
 		var langValue = app.storage.getItem(langKey); // Pass a key name to get its value.
 		//var value =app.lang;
-		if(langValue==null){
+		if(langValue==null || langValue==""){
 			
 			if(langOverride!==""){
 				langValue = langOverride;
