@@ -13,7 +13,7 @@ var deXML = {};
 var pgXML = {};
 var aslXML = {};
 var path = config.path;
-var vocal_path = "https://hymnal.corbinrose.com/hymns-vocal/";
+var vocal_path = config.vocal_path;
 
 var languageMap = {
 	"en":"English",
