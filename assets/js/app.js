@@ -123,6 +123,7 @@ var app = {
 
 	  	app.languages = langs.split(",").sort();
 	  	app.makeLanguageDropdown();
+	  	$("#footerBot").addClass(app.lang)
 	  	// set languages
 	},
 	eventBindings: function(){
@@ -421,6 +422,7 @@ var app = {
     
     app.lang = $(this).attr("rel");
     app.storage.setItem("lang", app.lang);
+    $("#footerBot").removeClass().addClass(app.lang)
     
     var returnHymn = $("#hymnSelect").val();
     app.makeDropdown(app.lang, returnHymn);

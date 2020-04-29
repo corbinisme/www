@@ -488,7 +488,16 @@ ul.tabs {
   display: table-cell;
 }
 #footerBot li.extraLink {
+  min-width: 110px;
+}
+#footerBot.en li.extraLink {
   min-width: 160px;
+}
+#footerBot #musicVocal {
+  display: none;
+}
+#footerBot.en #musicVocal {
+  display: inline-block;
 }
 #footerBot li.musicCell {
   width: 99%;
@@ -565,7 +574,7 @@ ul.tabs {
   margin-left: 0;
   margin-right: 0;
 }
-#footerBot .btn-group a:first-child {
+#footerBot.en .btn-group a:first-child {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0
 }
