@@ -121,7 +121,7 @@ var app = {
 		//storage.removeItem(key) // Pass a key name to remove that key from storage.
 
 
-	  	app.languages = langs.split(",").sort();
+	  	app.languages = langs.split(",");
 	  	app.makeLanguageDropdown();
 	  	$("#footerBot").addClass(app.lang)
 	  	// set languages
