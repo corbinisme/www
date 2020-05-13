@@ -64,6 +64,19 @@ var app = {
 	changeStorage:function(key,val){
 		app.storage.setItem(key, val);
 	},
+	getTitle: function(){
+		var currentLang = app.lang;
+		var currentTitle = "Hymnal";
+		switch(currentLang){
+			case "en": currentTitle = "Hymnal"; break;
+			case "fr": currentTitle = "Livre de cantiques"; break;
+			case "pg": currentTitle = "Hinário"; break;
+			case "de": currentTitle = "Gesangbuch"; break;
+			case "es": currentTitle = "Himnario"; break;
+			default: currentTitle = "Hymnal"; break;
+		}
+		$("#brand").html(currentTitle)
+	},
 	getConfig: function(){
 		app.brand = config.brand;
 	  	$("#brand em").text(app.brand);
@@ -85,19 +98,20 @@ var app = {
 			app.storage.setItem(langKey, langValue)
 		}
 		app.lang = langValue;
+		app.getTitle();
 		var fontKey = "size";
 		var fontSize = app.storage.getItem(fontKey);
 		if(fontSize==null){
-			fontSize = "17";
+			fontSize = "24";
 			app.storage.setItem(fontKey, fontSize)
 		}
 		app.size = fontSize;
-		$(".main.ui-content").css("font-size", app.size + "px");
+		$(".main.ui-content, #copyrightPage").css("font-size", app.size + "px");
 
 		var contrastKey = "contrast";
 		var contrastVal = app.storage.getItem(contrastKey);
 		if(contrastVal==null){
-			contrastVal = "false";
+			contrastVal = "true";
 			app.storage.setItem(contrastKey, contrastVal)
 		}
 		app.contrast = contrastVal;
@@ -128,6 +142,10 @@ var app = {
 	},
 	eventBindings: function(){
 
+		$(document).on("click", ".closeCopyright", function(){
+			$("#copyrightPage").hide()
+			$("#home").show();
+		});
 		// contrast icon
 	    $(".contrastIcon").on("click", function(){
 	      $("body").toggleClass("dim");
@@ -163,14 +181,19 @@ var app = {
 	        $(".hymnalSelection").hide();
 	        $("#searchField").val("").focus();
 	        $("#search .overlay").css("height", $(window).height());
-	      } else if($(this).attr("id")=="copyrights") {
+	      } else if($(this).attr("id")=="information") {
 	      	// show copyright
-	        
-	         $("#copyrightPage").show();
-	         $("#copyrightText").load("copyright.html");
+	         //console.log("copyright");
+	         $("#copyrightPage").show().css("height", "100vh");
+	         $("#copyrightPage .wrapForm")
+	         .removeClass()
+	         .addClass(app.lang)
+	         .addClass("wrapForm")
+	         .load("about.html");
+
 	      } else {
 	        $("#home").show();
-	        
+	        /*
 	        var valu = $("#hymnSelect").val();
 	        valu = parseInt(valu, 10);
 	        
@@ -184,6 +207,7 @@ var app = {
 	        $("#sharePage").show();
 	      	console.log(shareFB + "\n" + shareTW);
 	        $("#aboutText").load("about.html");
+	        */
 	        
 	        
 	      }
@@ -279,6 +303,7 @@ var app = {
 	    $(".mainPage #hymnSelect").change(function(){
 		    var id = $(this).val();
 		    var file = "hymn"+id;
+		    $("#copyrightPage").hide();
 		    $("#sharePage").hide();
 		    $(".musicIcon").removeClass("active");
 		    $('#jquery_jplayer_1').jPlayer("stop")
@@ -423,8 +448,10 @@ var app = {
     app.lang = $(this).attr("rel");
     app.storage.setItem("lang", app.lang);
     $("#footerBot").removeClass().addClass(app.lang)
-    
+    $("html").attr("lang", app.lang);
+    app.getTitle();
     var returnHymn = $("#hymnSelect").val();
+    $("#copyrightPage").hide();
     app.makeDropdown(app.lang, returnHymn);
    // console.log(lang + " | " + returnHymn);
     $("#hymnSelect").val(returnHymn).change();

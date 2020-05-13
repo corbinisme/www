@@ -3,7 +3,7 @@
 
 body {
   font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-  font-size: 110%; 
+  font-size: 1.3em; 
   -webkit-touch-callout: none;/* prevent callout to copy image, etc when tap to hold */
   margin: 0; 
   padding: 0; 
@@ -708,11 +708,7 @@ ul.tabs {
 .dataTables_wrapper {
   padding-top: 33px;
 }
-@media screen and (min-width:768px) {
-  .main {
-    font-size: 1.3em;
-  }
-}
+
 
 
 /* themes */
@@ -796,3 +792,30 @@ body table.dataTable thead .sorting_desc {
 #brand em {
   text-transform: uppercase;
 }
+.smallerText {
+  border-top-right-radius: 0px!important;
+  border-bottom-right-radius: 0px!important
+}
+.biggerText {
+  border-top-left-radius: 0px!important;
+  border-bottom-left-radius: 0px!important
+}
+
+.closeCopyright {
+  float: right;
+
+}
+#copyrightPage {
+  padding-top: 75px;
+  overflow: auto;
+  height: 100vh;
+  line-height: 1.3em;
+}
+
+#copyrightPage .wrapForm>div {display: none;}
+#copyrightPage .wrapForm.en>div.en {display: block;}
+#copyrightPage .wrapForm.es>div.es{display: block;} 
+#copyrightPage .wrapForm.pg>div.pg {display: block;} 
+#copyrightPage .wrapForm.fr>div.fr {display: block;} 
+#copyrightPage .wrapForm.de>div.de {display: block;}  
+
