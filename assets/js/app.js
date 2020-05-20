@@ -188,8 +188,17 @@ var app = {
 	         $("#copyrightPage .wrapForm")
 	         .removeClass()
 	         .addClass(app.lang)
-	         .addClass("wrapForm")
-	         .load("about.html");
+	         .addClass("wrapForm");
+	         $.ajax({
+	         	url: "about.html",
+	         	success: function(htm){
+	         		$("#copyrightPage .wrapForm").html(htm)
+	         	},
+	         	error: function(e){
+	         		$("#copyrightPage .wrapForm").html(englishCopyright);
+	         	}
+	         });
+	         
 
 	      } else {
 	        $("#home").show();

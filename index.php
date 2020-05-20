@@ -345,7 +345,7 @@ if(isset($_REQUEST['hymn'])){
 
   <script src="assets/js/main.js" 
     type="text/javascript"></script>
-  
+  <script type="text/javascript" src="js/englishCopyright.js"></script>
   <script src="assets/js/jquery-ui.js"></script>
   <script src="assets/js/autocomplete.js"></script>
 
