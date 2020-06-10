@@ -324,13 +324,13 @@ a.hiddenLink {
   color: #999;
 }
 #share .fa {font-size: 15px; color: #999;}
-#aboutText, #copyright {
+#aboutText, #copyright, #aboutUCG {
   padding: 10px;
   font-size: 0.7em;
 }
 
-#copyright>h1:first-child{margin-top: 0em;}
-#copyright p {font-size: 12px;}
+#copyright>h1:first-child{}
+#copyright p {}
 .loader {
   margin: auto;
   display: block;
@@ -371,8 +371,8 @@ a.hiddenLink {
 ul.tabs {
   list-style: none;
   margin: 0;
-  padding:0;
-  display: table;
+  padding:0 1px;
+  display: flex;
   margin-bottom: 1px;
   clear: both;
   width: 100%;
@@ -382,6 +382,7 @@ ul.tabs {
   border: 1px solid #aaa;
   border-top: none;
   margin: 0 1px;
+  margin-top: -1px;
 }
 .tabsContentWrapper p {
   line-height: 1.3em
@@ -391,18 +392,21 @@ ul.tabs {
 }
 .tabs {margin-top: 8px;}
 .tabs li {
-  display: table-cell;
+  display: block;
   list-style: none;
   padding: 5px;
   width: 50%;
   background: #ddd;
-  border-top-right-radius: 8px;
   border: 1px solid #aaa;
 }
 .tabs li:first-child {
   border-right: 1px solid #aaa;
   border-top-right-radius: 0px;
   border-top-left-radius: 8px;
+}
+.tabs li:last-child {
+	border-top-right-radius: 8px;
+	border-top-left-radius: 0px;
 }
 .tabs li a {
   display: block;
@@ -419,6 +423,9 @@ ul.tabs {
 }
 .tabContent.active {
   display: block;
+}
+.tabContent {
+	padding: 1em;
 }
 #sharePage .wrapForm {
   padding: 10px;
@@ -637,6 +644,8 @@ ul.tabs {
 }
 #hymnSelect {
   width: 100%;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 #formByNum, .searchWrapper {
   width: 100%;
@@ -810,6 +819,9 @@ body table.dataTable thead .sorting_desc {
   overflow: auto;
   height: 100vh;
   line-height: 1.3em;
+}
+#copyrightPage .tabs li {
+	flex: 1 33%;
 }
 
 #copyrightPage .wrapForm>div {display: none;}

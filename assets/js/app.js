@@ -146,6 +146,16 @@ var app = {
 			$("#copyrightPage").hide()
 			$("#home").show();
 		});
+
+		$(document).on("click", ".tabs li a", function(){
+			var id = $(this).attr("id");
+			id = id.substring(0, id.length-3);
+			$(".tabs li").removeClass("current");
+			$(this).closest("li").addClass("current");
+			$(".tabContent").removeClass("active");
+			$("#" + id).addClass("active")
+		});
+
 		// contrast icon
 	    $(".contrastIcon").on("click", function(){
 	      $("body").toggleClass("dim");
@@ -195,6 +205,7 @@ var app = {
 	         		$("#copyrightPage .wrapForm").html(htm)
 	         	},
 	         	error: function(e){
+	         		console.log("about text fail", englishCopyright)
 	         		$("#copyrightPage .wrapForm").html(englishCopyright);
 	         	}
 	         });
