@@ -23,6 +23,11 @@ if(isset($_REQUEST['c'])){
 } else {
   $title = "ucg";
 }
+$brand = "ucg";
+if(isset($_REQUEST['c'])){
+  $brand = $_REQUEST['c'];
+}
+$favicon = "/www/brands/". $brand . "/icon.png"
 ?>
 <html class="no-js" lang="en">
 <head> 
@@ -57,8 +62,13 @@ if(isset($_REQUEST['c'])){
    <link href="jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
    <link rel="stylesheet" href="assets/jplayer/jplayer.css" />
    <link rel="stylesheet" href="assets/css/jquery.dataTables.css" >
-   <meta name="og:image" content="icon.png" />
+   <meta property="og:title" content="<?php echo $brand;?> Hymnal" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hymnal.corbinrose.com/www/index.php?c=<?php echo $brand;?>" />
 
+   <meta property="og:image" content="https://hymnal.corbinrose.com<?php echo $favicon ;?>" />
+<style>
+</style>
 </head>
 <body class="<?php echo $title;?>">
 
@@ -148,7 +158,7 @@ if(isset($_REQUEST['c'])){
 
   <footer id="footerBot">
     <ul>
-      <?php if($title=="ucg"){
+      <?php if($title=="ucg2"){
         ?>
         <li class="extraLink">
         <a href="javascript:;" class="shareIcon contrastIcon" id="contrast">
@@ -306,11 +316,11 @@ if(isset($_REQUEST['c'])){
   var env="localhost";
 
 <?php if(isset($_REQUEST['lang'])){
-  echo 'var lang = "' . $_REQUEST['lang'] . '";';
+  echo 'var superlang = "' . $_REQUEST['lang'] . '";';
   echo "\n";
 } else {
   ?>
-  var lang= "en";
+  
   <?php
 }
 if(isset($_REQUEST['hymn'])){
@@ -345,7 +355,7 @@ if(isset($_REQUEST['hymn'])){
 
   <script src="assets/js/main.js" 
     type="text/javascript"></script>
-  <script type="text/javascript" src="js/englishCopyright.js"></script>
+  
   <script src="assets/js/jquery-ui.js"></script>
   <script src="assets/js/autocomplete.js"></script>
 
@@ -359,5 +369,6 @@ if(isset($_REQUEST['hymn'])){
 <script>
 
 </script>
+
   </body>
   </html>

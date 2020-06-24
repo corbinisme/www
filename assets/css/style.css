@@ -413,6 +413,8 @@ ul.tabs {
   color: #333;
   font-weight: bold;
   font-size: 14px;
+  line-height: 1em;
+  padding: 10px 0;
 }
 .tabs li.current {
   border-bottom: 1px solid #fff;
@@ -426,6 +428,16 @@ ul.tabs {
 }
 .tabContent {
 	padding: 1em;
+}
+
+.tabContents>div {
+  display: none;
+}
+.tabContents>div.current {
+  display: block;
+}
+.tabContents h1 {
+  line-height: 1em;
 }
 #sharePage .wrapForm {
   padding: 10px;

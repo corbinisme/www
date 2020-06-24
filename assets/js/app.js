@@ -149,11 +149,20 @@ var app = {
 
 		$(document).on("click", ".tabs li a", function(){
 			var id = $(this).attr("id");
-			id = id.substring(0, id.length-3);
-			$(".tabs li").removeClass("current");
-			$(this).closest("li").addClass("current");
-			$(".tabContent").removeClass("active");
-			$("#" + id).addClass("active")
+			console.log("id?", typeof id)
+			if(typeof id=="undefined"){
+				id = $(this).attr("data-id");
+				$(".tabContents>div").removeClass("current");
+				$(".tabContents>div[class='" + id + "']").addClass("current");
+				$(".tabs li").removeClass("current");
+				$(this).closest("li").addClass("current");
+			} else {
+				id = id.substring(0, id.length-3);
+				$(".tabs li").removeClass("current");
+				$(this).closest("li").addClass("current");
+				$(".tabContent").removeClass("active");
+				$("#" + id).addClass("active")
+			}
 		});
 
 		// contrast icon
