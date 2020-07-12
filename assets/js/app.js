@@ -69,7 +69,7 @@ var app = {
 		var currentTitle = "Hymnal";
 		switch(currentLang){
 			case "en": currentTitle = "Hymnal"; break;
-			case "fr": currentTitle = "Livre de cantiques"; break;
+			case "fr": currentTitle = "Cantiques"; break;
 			case "pg": currentTitle = "Hinário"; break;
 			case "de": currentTitle = "Gesangbuch"; break;
 			case "es": currentTitle = "Himnario"; break;
