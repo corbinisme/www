@@ -83,7 +83,6 @@ var app = {
 	  	$("title").html(app.brand + " hymnal");
 
 	  	var langs = config.langs;
-
 	  	app.storage = window.localStorage;
 		var langKey = "lang";
 		var langValue = app.storage.getItem(langKey); // Pass a key name to get its value.
@@ -556,23 +555,83 @@ var app = {
 	  var scriptPath = "lang/" + lang + "/list.js";
 	  $("#tocWrap").html("");
 
+	  var titleText = "Title";
+      var pageText = "Page";
+      var searchText = "Search";
+      var searchByNumText = "Search By Number";
+      var goText = "Go"
+      var title = null;
+
 	  switch(lang){
-	    case 'en': var title = title_en; break;
-	    case 'es': var title = title_es; break;
-	    case 'pg': var title = title_pg; break;
-	    case 'fr': var title = title_fr; break;
-	    case 'de': var title = title_de; break;
-	    case 'asl': var title = title_asl; break;
-	    default: var title = title_en; break;
+	    case 'en': 
+	    	title = title_en;
+	    	titleText = "Title"; 
+	    	pageText = "Page";
+	    	searchText = "Search";
+	    	searchByNumText = "Search By Number";
+	    	goText = "Go";
+	 		break;
+	    case 'es':  
+	    	title = title_es; 
+	    	titleText = "Título"; 
+	    	pageText = "#";
+	    	searchText = "Buscar himnos";
+	    	searchByNumText = "Buscar por número";
+	    	goText = "Buscar";
+	    	break;
+	    case 'pg': 
+	    	title = title_pg; 
+	    	titleText = "Título"; 
+	    	pageText = "Página";
+	    	searchText = "Pesquisar arquivo";
+	    	searchByNumText = "Pesquisar por número";
+	    	goText = "OK";
+	    	break;
+	    case 'fr': 
+	    	title = title_fr; 
+	    	titleText = "Titre"; 
+	    	pageText = "Page";
+	    	searchText ="Rechercher par titre";
+	    	searchByNumText = "Rechercher par numéro";
+	    	goText = "Recherche";
+	    	break;
+	    case 'de': 
+	    	title = title_de; 
+	    	titleText = "Titel"; 
+	    	pageText = "Seite";
+	    	searchText = "Suche nach Titel";
+	    	searchByNumText = "Suche nach Liednummer";
+	    	goText = "Suche";
+	    	break;
+	    case 'asl': 
+	    	title = title_asl; 
+	    	titleText = "Title"; 
+	    	pageText = "Page";
+	    	searchText = "Search";
+	    	searchByNumText = "Search By Number";
+	    	goText = "Go";
+	    	break;
+	    default: 
+	    	title = title_en; 
+	    	titleText = "Title"; 
+	    	pageText = "Page";
+	    	searchText  = "Search";
+	    	searchByNumText = "Search By Number";
+	    	goText = "Go";
+	    	break;
 	  }
 	  
 
 	  if(title){
+
+	  	$("#searchByNum").html(searchByNumText);
+	  	$(".goBtn").val(goText);
 	    
 	      $("#hymnSelect").html("");
 	      var $toc = $(document.createElement("table"));
 	          $toc.attr("id", "toc");
-	          $toc.append("<thead><tr><th>Title</th><th>Page</th></tr></thead>");
+
+	          $toc.append("<thead><tr><th>" + titleText + "</th><th>" + pageText + "</th></tr></thead>");
 	      var $tbody = $(document.createElement("tbody"));
 	      for(var i=0; i<title.length; i++){
 	        var num = i+1;
@@ -608,7 +667,7 @@ var app = {
 	      $("#toc").dataTable({
 	        'iDisplayLength': 195,
 	        language: {
-	          searchPlaceholder: "Search records"
+	          searchPlaceholder: searchText
 	         },
 	         "dom": '<"filter"f>t<"clear">'
 	      });
